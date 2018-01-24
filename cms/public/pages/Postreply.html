@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/courseMag.css">
+    <title>人员管理</title>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .selected,.selected option,#myselect{
+            background-color: rgba(0,0,0,0);
+            border: 0;
+            color:gray;
+        }
+        #lookImg{
+            background-color: rgba(0,0,0,0);
+            border: 0;
+            color:rgb(243,108,58)
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="perheaderPstyle">基础管理>回复管理</p>
+        </div>
+    </div>
+    <div class="row perInput">
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <label for="perName">帖子ID：</label>
+            <input type="text" id="perName">
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <label for="perTel">帖子编号：</label>
+            <input type="text" id="perTel">
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <label for="perQQ">发帖用户ID：</label>
+            <input type="text" id="perQQ">
+        </div>
+        <!--下拉框-->
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 perO">
+            <div class="per_btn">
+                <div>
+                    <div class="per_butText">状态</div>
+                    <div class="perIco" onclick="xianshi()"><span class="caret"></span></div>
+                </div>
+                <ul class="perUl">
+                    <li><span class="per_li">显示</span></li>
+                    <li><span class="per_li">隐藏</span></li>
+                </ul>
+            </div>
+        </div>
+        <!--查询、-->
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <div class="perCha">查询</div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 mp">
+            <div class="cou_app">
+
+            </div>
+        </div>
+    </div>
+    <div class="row per_Table">
+        <div class="col-lg-12">
+            <div class="table-responsive overflow" tabindex="5003" style="overflow: hidden; outline: none;">
+                <table class="table table-bordered " id="per_table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>帖子编号</th>
+                        <th>用户编号</th>
+                        <th>回复内容</th>
+                        <th>上级回复编号</th>
+                        <th>注册时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+<<<<<<< .mine
+                    <tbody class="per_table" id="postreplytbody">
+=======
+                    <tbody class="per_table">
+>>>>>>> .r27
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="per_maxBox" class="col-lg-12 per_maxBox">
+            <div>
+                <p class="per_boxP">提 示</p>
+                <div id="per_minBox" class="per_minBox">
+                    <span>状态改变</span>
+                    <select name="myselect" id="myselect">
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                </div>
+                <div class="per_sure" id="save">确认</div>
+                <div class="per_close" onclick="closeWindow()">取消</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script src="../js/jquery-1.11.3.js"></script>
+<!--<script src="../js/data.js"></script>-->
+<script src="../js/courseMag.js"></script>
+<script>
+<<<<<<< .mine
+    function PostreplyHtml(jsonObj){
+        "use strict";
+        var str="";
+//        var xz = ("<select><option value='1'>显示</option><option value='0'>隐藏</option></select>");
+        for(var i=0;i<jsonObj.length;i++){
+
+            if(jsonObj[i].state == 1){
+                jsonObj[i].state = '启用';
+            }else{
+                jsonObj[i].state = '禁用';
+            }
+            str+=("<tr>" +
+            "<td>"+jsonObj[i].breply_id+"</td>" +      //帖子ID
+            "<td>"+jsonObj[i].breply_bbs_id+"</td>" + //帖子内容
+            "<td>"+jsonObj[i].user_name+"</td>" + //用户名
+            "<td>"+jsonObj[i].breply_content+"</td>" + //回复内容
+            "<td>"+jsonObj[i].breply_topid+"</td>" + //上级回复ID
+            "<td>"+jsonObj[i].joinDate+"</td>" + //建立时间
+            "<td>"+jsonObj[i].state+"</td>" + //状态
+            "<td>" +
+            "<span sid='"+jsonObj[i].breply_id+"'class='edite glyphicon glyphicon-edit per_span' onclick='per_edite()'></span>"
+            +"</td>" +
+            "</tr>");
+=======
+    createShowingTable();
+    //动态的创建一个table，同时将后台获取的数据动态的填充到相应的单元格
+    function createShowingTable() {
+        var tableStr = "";
+        var len = crew.length;
+        for (var i = 0; i < len; i++) {
+            tableStr = tableStr + "<tr>"
+                + "<td>" + crew[i].creN + "</td>"
+                + "<td >" + crew[i].creB + "</td>"
+                + "<td >" + crew[i].creP + "</td>"
+                + "<td >" + crew[i].creI + "</td>"
+                + "<td >" + crew[i].creT + "</td>"
+                + "<td >" + crew[i].creQ + "</td>"
+                    + "<td ><select class='selected'><option value='1' selected>启用</option><option value='0'>禁用</option></select></td>"
+                    + "<td ><span class='glyphicon glyphicon-edit' onclick='per_edite(text1)'></span>"
+                + "<span class='glyphicon glyphicon-trash per_span' onclick='per_edite(text2)'></span></td>"
+                + "</tr>";
+>>>>>>> .r27
+        }
+        //将动态生成的table添加的事先隐藏的div中.
+<<<<<<< .mine
+        $("#postreplytbody").html(str);
+=======
+        $(".per_table").html(tableStr);
+>>>>>>> .r27
+    }
+<<<<<<< .mine
+    $(document).ready(function () {
+        PostreplyList();
+    });
+    function PostreplyList(){
+        "use strict";
+        $.post('/community/postreplyList.do',{},function(data){
+            console.log('进来了PostreplyHtml');
+            PostreplyHtml(data);
+        },"json");
+    }
+
+    $("#postreplysearch").click(function(){
+        var breply_id = $("#breply_id").val();//帖子ID
+        var breply_bbs_id = $("#breply_bbs_id").val();//帖子内容
+        var breply_user_id = $("#breply_user_id").val();//用户ID
+        var state = $("#state").val();//状态
+        var param = "breply_id="+breply_id+"&breply_bbs_id="+breply_bbs_id+"&breply_user_id="+breply_user_id+"&state="+state;
+        console.log(param);
+        $.post('/community/postreplySearch.do',param,function(data){
+            console.log(data);
+            PostreplyHtml(data);
+        },"json");
+    });
+
+    /*修改弹出框的操作*/
+    //修改按钮事件
+    function per_edite() {
+        $(".per_maxBox").css({"visibility":"visible",
+            "top": "200px"
+        });
+    }
+    /*弹出框获取值*/
+    var id;
+    $("#postreplytbody").on("click",".edite",function () {
+        console.log('gg');
+        id=$(this).attr("sid");
+        console.log(id);
+        $.post('/community/postreplygetState.do',{"id":id},function(data){  //获取后台传输过来的数据
+            console.log(data[0].state);
+            $("#myselect").val(data[0].state);   //弹出框获取值
+        },"json");
+    });
+    /*弹出框更新值到state*/
+    $(document).on("click","#save",function () {
+        console.log("save");
+        console.log(id);
+        var state = $("#myselect").val();       /*获取弹出框的值*/
+        var param = "state="+state+"&id="+id;   /*将值放到param*/
+        console.log(param);
+        $.post('/community/postreplyupdate.do',param,function(data){
+            if(data.code==200){
+                PostreplyList();
+            }
+            console.log(data);
+//            list();
+        },"json");
+        closeWindow();
+    });
+
+=======
+>>>>>>> .r27
+</script>
+</body>
+</html>

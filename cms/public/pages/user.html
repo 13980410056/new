@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/courseMag.css">
+    <title>用户管理</title>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="perheaderPstyle">汉服>用户管理</p>
+        </div>
+    </div>
+    <div class="row perInput">
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <label for="perName">昵称：</label>
+            <input type="text" id="perName">
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <label for="perTel">账号：</label>
+            <input type="text" id="perTel">
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <label for="perQQ">手机号码：</label>
+            <input type="text" id="perQQ">
+        </div>
+        <!--下拉框-->
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 perO">
+            <div class="per_btn">
+                <div>
+                    <div class="per_butText">状态</div>
+                    <div class="perIco" onclick="xianshi()"><span class="caret"></span></div>
+                </div>
+                <ul class="perUl">
+                    <li><span class="per_li">正常</span></li>
+                    <li><span class="per_li">禁用</span></li>
+                </ul>
+            </div>
+        </div>
+        <!--查询、-->
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <div class="perCha">查询</div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 mp">
+            <div class="cou_app">
+                <!--<div>-->
+                    <!--<span class="glyphicon glyphicon-plus-sign cou_coi"></span>-->
+                <!--</div>-->
+                <!--<div>-->
+                    <!--<a href="admin_add.html">新增人员</a>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+    <div class="row per_Table">
+        <div class="col-lg-12">
+            <div class="table-responsive overflow" tabindex="5003" style="overflow: hidden; outline: none;">
+                <table class="table table-bordered " id="per_table">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>用户昵称</th>
+                        <th>账号</th>
+                        <th>密码</th>
+                        <th>性别</th>
+                        <th>生日</th>
+                        <th>所在地</th>
+                        <th>手机号码</th>
+                        <th>头像Url</th>
+                        <th>注册时间</th>
+                        <th>状态</th>
+                        <th>操 作</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td ><span class='glyphicon glyphicon-edit' onclick='per_edite(text1)'></span>"
+                        <!--<span class='glyphicon glyphicon-trash per_span' onclick='per_edite(text2)'></span>-->
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody class="per_table">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="per_maxBox" class="col-lg-12 per_maxBox">
+            <div>
+                <p class="per_boxP">提 示</p>
+                <div id="per_minBox" class="per_minBox">
+
+                </div>
+                <div class="per_sure" onclick="closeWindow()">确认</div>
+                <div class="per_close" onclick="closeWindow()">取消</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/courseMag.js"></script>
+<script>
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+/* pages/details/details.wxss */
+.details{
+  height: 300rpx;
+}
+.details>image{
+  width: 100%;
+  height: 300rpx;
+}
+.details-name{
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 2px 0
+}
+.details-browse{
+  display: flex;
+  justify-content: center;
+  height: 50rpx;
+  border-bottom: 1px solid #eee
+}
+.details-browse>text{
+  font-size: 24rpx;
+  color: #666
+}
+.details-materials{
+   display: flex;
+   justify-content: center;
+   margin: 10px 0 ;
+}
+.details-material{
+  display: flex;
+  justify-content: space-around
+}
+.details-material>view{
+  width: 95%;
+  border-bottom: 1px solid #eee;
+  margin:0 0 5px 0;
+  height:60rpx;
+}
+.details-material>view>text{
+  display: inline-block;
+  font-size:31rpx;
+}
+.txt1{
+  width: 50%;
+  padding: 0 0 0 20px;
+}
+.txt2{
+  width: 40%;
+  color: #666;
+  padding: 0 0 0 10px
+}
+.details-step{
+  margin: 10px 0 ;
+}
+.details-step>image,.details-step>text{
+    width:95%;
+    display:block;
+    margin:0 auto;
+    padding: 0;
+}
+.details-step>image{
+  height:300rpx;
+}
+.details-step>text{
+  padding: 5px 0;
+}

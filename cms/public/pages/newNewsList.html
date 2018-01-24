@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+    <script charset="utf-8" src="../kindeditor/kindeditor-all-min.js"></script>
+    <script charset="utf-8" src="../kindeditor/lang/zh-CN.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <title>新增知识</title>
+    <link rel="stylesheet" href="../css/newStaffList.css"/>
+</head>
+<style>
+    form {
+        font-size: 20px;
+    }
+    #mybtn {
+        color: rgba(255, 0, 0, 0.66);
+        width: 100px;
+    }
+    select  {
+        color: rgb(255, 255, 255);
+        background-color: rgba(8, 0, 29, 0.86);
+    }
+</style>
+<body>
+<form action="/articUploadRuote/news.do" method="post">
+    新闻标题：<input type="text" id="txtTitle" name="txtTitle"/>
+    新闻简介：<input type="text" id="describe" name="describe"/>
+    作者：<select name="Mselect" id="select"></select>
+   <textarea id="txtContent" name="txtContent" rows="12"></textarea>
+    <button type="submit" id="mybtn">发表</button>
+    <button type="button"><a href="news.html">取消</a></button>
+</form>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+    var editor;
+    KindEditor.ready(function(K) {
+        editor = K.create('#txtContent', {
+            allowImageUpload : true, //支持图片上传
+            uploadJson: './uploadImg.do',   //图片上传时向服务提交的地址
+            items : [
+                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic',
+                'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright',    'insertorderedlist', 'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+        });
+    })
+    $(function () {
+        $.post('/article/author.do',{},function(data){
+            var obj=data;
+            for(var i=0;i<obj.length;i++){
+                $('#select').append("<option value='"+obj[i].admin_id+"'>"+obj[i].admin_name+"</option>")
+            }
+        },'json')
+    })
+</script>
+</body>
+</html>

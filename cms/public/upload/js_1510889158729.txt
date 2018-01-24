@@ -1,0 +1,243 @@
+var staffTotalNum;//总人数
+var staffListNum;//列表数
+var everyListNum=5;//每页显示数
+var nowList=1;//当前页码
+$(function () {
+  $.get("/index/jobNameLoad.do",{},function(data){
+    $("#jobName").html('');
+    $("#jobName").append('<option>-所有-</option>');
+    for(var i=0;i<data.length;i++){
+      $("#jobName").append('<option>'+data[i].jobName+'</option>');
+    }
+    $("#job").html('');
+    for(var i=0;i<data.length;i++){
+      $("#job").append('<option>'+data[i].jobName+'</option>');
+    }
+    $("#changeJob").html('');
+    for(var i=0;i<data.length;i++){
+      $("#changeJob").append('<option>'+data[i].jobName+'</option>');
+    }
+  },"json");
+  getStaffTotalNum();
+});
+//获取总人数
+function getStaffTotalNum() {
+  $.get("/index/getStaffTotalNum.do",{},function(data) {
+    staffTotalNum=data[0].staffTotalNum;
+    staffListNum=Math.ceil(staffTotalNum/everyListNum);
+    toBeNowList();
+  });
+}
+//显示页码
+function toBeNowList() {
+  $("#toBeNowList").html("");
+  for(var i=1;i<=staffListNum;i++){
+    $("#toBeNowList").append("<li ListNumid="+i+" style='float: left;'>"+i+"</li>");
+  }
+}
+//查询数据
+function searchData(nowList) {
+  var jobName=$("#jobName").val();
+  if(jobName=="-所有-"){
+    jobName='';
+  }
+  var state=$("#state").val();
+  if(state=="-所有-"){
+    state='';
+  }
+  var param="jobName="+jobName+"&state="+state+"&nowList="+nowList;
+  $.post("/index/searchData.do",param,function(data) {
+    staffTotalNum=data.length;
+    console.log(staffTotalNum);
+    staffListNum=Math.ceil(staffTotalNum/everyListNum);
+    listshuju(data);
+    getStaffTotalSelectNum();
+    toBeNowList();
+  },"json");
+}
+//查询数据时获取页码数
+function getStaffTotalSelectNum() {
+  var jobName=$("#jobName").val();
+  if(jobName=="-所有-"){
+    jobName='';
+  }
+  var state=$("#state").val();
+  if(state=="-所有-"){
+    state='';
+  }
+  var param="jobName="+jobName+"&state="+state;
+  $.post("/index/getStaffTotalSelectNum.do",param,function(data) {
+    staffTotalNum=data[0].num;
+    staffListNum=Math.ceil(staffTotalNum/everyListNum);
+    toBeNowList();
+  },"json");
+}
+//查询按钮
+$("#searchBtn").click(function () {
+  nowList=1;
+  var jobName=$("#jobName").val();
+  var state=$("#state").val();
+  searchData(nowList);
+});
+//添加数据
+function listshuju(data) {
+  var state;
+  $("#insertInto").html('');
+  for(var i=0;i<data.length;i++){
+    if(data[i].state==1){
+      state="启用"
+    }else if(data[i].state==0){
+      state="禁用"
+    }
+    $("#insertInto").append(
+    '<tr>'+
+    '<td>'+
+    '<div class="people_icon_box del_box sx" firstId='+ data[i].staffId + '">' +
+      '<span class="people_icon">√</span>'+
+    '</div>'+
+    '</td>'+
+    '<td>'+data[i].staffId +'</td>'+
+    '<td>'+data[i].staffName +'</td>'+
+    '<td>'+data[i].jobName +'</td>'+
+    '<td>'+data[i].hiredate +'</td>'+
+    '<td>'+state+ '</td>'+
+    '<td>'+data[i].createName +'</td>'+
+    '<td>'+data[i].createDate +'</td>'+
+      '<td>'+
+      '<div class="people_icon_box change sx" changeid="'+data[i].staffId +'">'+
+      '<span class="people_icon" data-toggle="modal" data-target="#changeAdd">修改</span>'+
+    '</div>' +
+    '<div class="people_icon_box delete sx"  deleteid="'+data[i].staffId + '">'+
+      '<span class="people_icon" data-toggle="modal" data-target="#people_del" >删除</span>'+
+    '</div></td></tr>'
+    );
+  }
+}
+//删除
+$("#insertInto").on("click",".delete",function () {
+  var id=$(this).attr("deleteid");
+  $("#del_sure").click(function(){
+    var param="id="+id;
+    console.log(param);
+    $.post("/index/delete.do",param,function(data) {
+      searchData(nowList);
+    });
+  });
+});
+//修改
+$("#insertInto").on("click",".change",function () {
+  var id=$(this).attr("changeid");
+  $("#change_sure").click(function(){
+    var changeStaffName=$("#changeStaffName").val();
+    var changePwd=$("#changePwd").val();
+    var changeJob=$("#changeJob").val();
+    var changeStates=$("#changeStates").val();
+    var param="id="+id+"&changeStaffName="+changeStaffName+"&changePwd="+changePwd+"&changeJob="+changeJob+"&changeStates="+changeStates;
+    console.log(param);
+    $.post("/index/changeSerch.do",param,function(data) {
+      searchData(nowList);
+    });
+  });
+});
+
+//路由
+myRoute.route("/changeSerch.do").post(indexControl.changeSerch);
+//控制层
+function changeSerch(req,res) {
+  let id=req.body.id;
+  let changeStaffName=req.body.changeStaffName;
+  let changePwd=req.body.changePwd;
+  let changeJob=req.body.changeJob;
+  let changeStates=req.body.changeStates;
+  indexModal.changeSerch(id,changeStaffName,changePwd,changeJob,changeStates)
+    .then(function (data) {
+      res.send("修改成功");
+    })
+    .catch(function (err) {
+      res.send("数据库出错");
+    })
+}
+//刀
+function changeSerch(id,changeStaffName,changePwd,changeJob,changeStates) {
+  return new Promise(function (resolve,reject) {
+    if(changeStates=="启用"){
+      changeStates=1;
+    }else if(changeStates=="禁用"){
+      changeStates=0;
+    }
+    let sql = "UPDATE staff SET staffName=?,pwd=?,jobId=(SELECT jobId FROM job WHERE jobName =?),state=? WHERE staffId=?";
+    var arr=[changeStaffName,changePwd,changeJob,changeStates,parseInt(id)]
+    sqlPool.query(sql,arr)
+      .then(function (data) {
+        resolve(data);
+      })
+      .catch(function (err) {
+        reject(err);
+      })
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//新增
+$("#addNew").click(function () {
+  $("#add_sure").click(function(){
+    var user=$("#user").val();
+    var pwd=$("#pwd").val();
+    var staffName=$("#staffName").val();
+    var job=$("#job").val();
+    var hiredate=$("#hiredate").val();
+    var states=$("#states").val();
+    if(staffName==""||user==""||pwd==""){
+      alert("昵称，帐号，密码不能为空！");
+    }else {
+      var param="user="+user+"&pwd="+pwd+"&staffName="+staffName+"&job="+job+"&hiredate="+hiredate+"&states="+states;
+      $.post("/index/newAdd.do",param,function(data) {
+        if(data=="新增失败"){
+          alert(data);
+        }else if(data=="新增成功"){
+          searchData(nowList);
+        }
+      });
+    }
+  });
+});
+//上一页
+$("#topList").click(function () {
+  if(nowList>0){
+    nowList--;
+    var jobName=$("#jobName").val();
+    var state=$("#state").val();
+    searchData(nowList);
+  }
+});
+//下一页
+$("#downList").click(function () {
+  if(nowList<staffListNum){
+    nowList++;
+    var jobName=$("#jobName").val();
+    var state=$("#state").val();
+    searchData(nowList);
+  }
+});
+//分页
+$("#toBeNowList").on("click","li[listnumid]",function () {
+  nowList=$(this).text();
+  searchData(nowList);
+});
+
+
+
+
+

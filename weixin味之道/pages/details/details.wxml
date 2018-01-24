@@ -1,0 +1,36 @@
+<!--pages/details/details.wxml-->
+<view class='details'>
+  <image src="{{pic}}"  aspectFit/>
+</view> 
+<view class="details-name">
+   <text>{{name}}</text> 
+</view>
+<view class="details-browse">
+   <text>浏览人数：10</text> 
+</view>
+<view class='details-materials'>
+   <text class='iconfont icon-hengxian icon-hengxiana'>食材明细</text> 
+</view>
+<block wx:for="{{material}}">
+  <view class='details-material '>
+      <view>
+          <text class='txt1'>{{item.mname}}</text>
+          <text class='txt2'>{{item.amount}}</text>
+      </view>
+  </view>
+</block>  
+
+<view class='details-materials'>
+   <text class='iconfont icon-hengxian icon-hengxiana'>制作步骤</text> 
+</view>
+
+<block wx:for="{{process}}">
+  <view class='details-step'>
+      <image src="{{item.pic}}"></image>
+       <text class='txt2'>{{item.id}}.{{item.pcontent}}</text> 
+  </view>
+</block> 
+
+
+
+                  

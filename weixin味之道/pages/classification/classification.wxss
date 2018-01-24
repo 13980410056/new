@@ -1,0 +1,20 @@
+/* pages/classification/classification.wxss */
+.classification{
+  margin:0 0 20px 0;
+}
+.classification>text{
+  margin:10px 10px 5px 10px ;
+  font-size:32rpx;
+  font-weight:900;
+  display:block;
+}
+.classification>view>image{
+  width:21%;
+  height:140rpx;
+  padding:2%;
+}
+.classification>view{
+  display: flex;
+  flex-wrap:wrap;
+  justify-content:flex-start;
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>评价/回复管理</title>
+    <link href="../bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/orderGoods.css"/>
+    <style>
+        body{
+            background-color: #5cbdaa;
+        }
+        .classcBtn{
+            background-color: #f36c3a;
+            width: 60px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 3px;
+            font-size: 14px;
+            color: white;
+            border: none;
+        }
+        #classbj1{
+            margin-left: 0;
+        }
+        #imgBox{
+            width: 500px;
+            height: 500px;
+            border: 1px solid white;
+            border-radius: 15px;
+            position: absolute;
+            top: 130px;
+            left: calc(50% - 250px);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+       <div class="col-lg-12">
+           <span id="classb">评价/回复管理</span>
+       </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-9"></div>
+        <div class="col-xs-3">
+           <div id="classtj">
+
+           </div>
+        </div>
+    </div>
+    <div class="row" id="classs">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            <span class="classm">商品评价编号</span> <input type="text" placeholder=""/>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            <span class="classm">创建人</span> <input type="text" placeholder=""/>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            <span class="classm">评价内容</span> <input type="text" placeholder=""/>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div id="classc">
+                <span>查询</span>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="classss">
+        <div class="col-xs-12">
+            <table>
+                <tr>
+                    <td>评价编号</td>
+                    <td>用户</td>
+                    <td>评价内容</td>
+                    <td>评价时间</td>
+                    <td>图片</td>
+                    <td>操作</td>
+                </tr>
+                <tr id="classsc">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><button class="classcBtn" onclick="myImg()"><span>查看</span></button></td>
+                    <td>
+                        <span class="planBtn2" id="classbj1">回复</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+<div class="myTs">
+    <div class="myWron">
+        <div class="myTishi">提示</div>
+        <div class="myWhat1">回复：<textarea name="" id="" style="vertical-align: middle;background-color: inherit"></textarea></div>
+        <div class="myOk">确定</div>
+        <div class="myNo">取消</div>
+    </div>
+</div>
+<div id="imgBox">
+    <!--此处放入图片-->
+    <div></div>
+    <button class="classcBtn" onclick="imgSure()">确定</button>
+</div>
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../js/datas.js"></script>
+<script src="../js/classMag.js"></script>
+<script>
+    function myImg() {
+        $("#imgBox").fadeIn();
+    }
+    function imgSure() {
+        $("#imgBox").fadeOut();
+    }
+</script>
+</body>
+</html>

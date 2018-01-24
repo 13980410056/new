@@ -1,0 +1,32 @@
+<view class="classification">
+ <text>热门分类</text>
+ <view>
+    <image src='../../img/jcc.png' data-id='303' catchtap='details'></image>
+    <image src='../../img/xfc.png' data-id='310' catchtap='details'></image>
+    <image src='../../img/zc.png'  data-id='562' catchtap='details'></image>
+    <image src='../../img/tz.png'  data-id='563' catchtap='details'></image>
+    <image src='../../img/hp.png'  data-id='338' catchtap='details'></image>
+  </view>
+</view>
+
+<view class="classification">
+ <text>菜式</text>
+ <view>
+    <image src='../../img/ksc.png' data-id='304' catchtap='details'></image>
+    <image src='../../img/sc.png' data-id='307' catchtap='details'></image>
+    <image src='../../img/ls.png'  data-id='350' catchtap='details'></image>
+    <image src='../../img/xjc.png'  data-id='311' catchtap='details'></image>
+  </view>
+</view>
+
+<view class="classification">
+ <text>场景</text>
+ <view>
+    <image src='../../img/yrs.png' data-id='570' catchtap='details'></image>
+    <image src='../../img/yk.png' data-id='572' catchtap='details'></image>
+    <image src='../../img/xwc.png'  data-id='564' catchtap='details'></image>
+    <image src='../../img/bd.png'  data-id='364' catchtap='details'></image>
+    <image src='../../img/ptff.png'  data-id='475' catchtap='details'></image>
+    <image src='../../img/xy.png'  data-id='566' catchtap='details'></image>
+  </view>
+</view>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="../bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/courseMag.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <title>修改</title>
+    <link rel="stylesheet" href="../css/newClassList.css">
+    <style>
+        body{
+            background-color: #5cbdaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container zhuye">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 newClass_xinzen">
+                订单表管理>修改
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 newClass_title">
+                修改订单地址信息
+            </div>
+            <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 xx"></div>-->
+        </div>
+       <div class="container">
+
+
+           <div class="row newClass_margin-top">
+
+                   <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 perO">
+                       <div class="per_btn">
+                           <div>
+                               <div class="per_butText">选择省</div>
+                               <div class="perIco" onclick="xianshi()"><span class="caret"></span></div>
+                           </div>
+                           <ul class="perUl">
+                               <li><span class="per_li">邹杰</span></li>
+                           </ul>
+                       </div>
+                   </div>
+               <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 perO">
+                   <div class="per_btn">
+                       <div>
+                           <div class="per_butText">选择市</div>
+                           <div class="perIco" onclick="xianshi2()"><span class="caret"></span></div>
+                       </div>
+                       <ul class="perUl2">
+                           <li><span class="per_li">邹杰</span></li>
+                       </ul>
+                   </div>
+               </div>
+               <div style="margin-top: 55px;margin-left: 5px">
+
+                   <div class="col-lg-11 col-md-11 col-sm-10 col-xs-10 newClass_textarea">
+                       <div class="newClass-beihzu">备注</div>
+                       <textarea></textarea>
+                   </div>
+               </div>
+
+           </div>
+       </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="newClass_butBaoCun">保存</div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--删除弹框-->
+    <div class="container newCLassPos">
+        <div class="newCLass_del">
+            <div class="newCLass-tiShi">提示</div>
+            <div class="newCLass-text">是否删除当前排课</div>
+            <div class="newCLass_qr_del">
+                <div class="newCLass_queren">确认</div>
+                <div class="newCLass_delete">取消</div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <script src="../js/jquery-1.11.3.js"></script>
+    <script src="../js/datas.js"></script>
+    <script src="../js/newClassList.js"></script>
+    <script src="../js/courseMag.js"></script>
+    <script>
+        function xianshi2() {
+            if ($(".perUl2").css("visibility")=="hidden"){
+                $(".perUl2").css("transition","all .2s linear");
+                $(".perUl2").css("transform","scale(1.2)");
+                $(".perUl2").css("visibility","visible");
+                setTimeout(function () {
+                    $(".perUl2").css("transform","scale(0.8)");
+                    $(".perUl2").css("transition","all .2s linear");
+                },100);
+                setTimeout(function () {
+                    $(".perUl2").css("transform","scale(1)");
+                    $(".perUl2").css("transition","all .2s linear");
+                },200)
+            }else{
+                $(".perUl2").css("transform","scale(1)");
+                $(".perUl2").css("visibility","hidden");
+                $(".perUl2").css("transition","none")
+            }
+        }
+    </script>
+</body>
+</html>

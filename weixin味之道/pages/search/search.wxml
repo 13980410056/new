@@ -1,0 +1,33 @@
+<!--pages/search/search.wxml-->
+<view class='Carousel'>
+  <swiper indicator-dots="false" class='Carousel-swiper'
+    autoplay="true" interval="5000" duration="500" circular="true" current >
+    <block wx:for="{{imgUrls}}"  wx:key="id">
+      <swiper-item>
+           <image  src="{{item}}" class="Carousel-image" aspectFit/>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>  
+
+<view class='search'>
+    <input type='text' placeholder="搜索菜名" bindinput='foodName'></input>
+    <view class='iconfont icon-sousuo' catchtap='search'></view>
+</view>
+
+
+<view class='list'>
+    <block wx:for="{{more}}" wx:key="id">
+        <view class='lists' data-id='{{item.id}}' catchtap='details'>
+            <image src="{{item.pic}}"></image>
+            <text class='lists-txt1'>{{item.name}}</text>
+            <text class='lists-txt2 iconfont icon-chakan'>{{item.num}}</text>
+        </view>
+    </block>
+</view>
+
+
+<view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+</view>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/courseMag.css">
+    <title>作品管理</title>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .showImg{
+            background-color: #f36c3a;
+            width: 60px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            border-radius: 3px;
+            font-size: 14px;
+            color: white;
+            border: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+        #toBeNowList >li {
+            float: left;
+            margin: 0 2%;
+            color:#fff;
+            font-size: 22px;
+        }
+        #page{
+            margin: 0 auto ;
+            width: 80%;
+            text-align: center;
+        }
+        #page>div {
+            float: left;
+            font-size: 20px;
+            margin: 0 10%;
+            color:#fff
+        }
+    </style>
+    <style>
+        #imgBox>img{
+            float: left;
+            width: 100px;
+            height: 100px;
+
+        }
+    </style>
+</head>
+<body>
+<div class="modal fade" id="myModal9" tabindex="-1" role="dialog" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span onclick="imgSure()" aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">作品图片</h4>
+            </div>
+            <div class="modal-body " style="height: 300px">
+                <div class="form-group "id="imgBox">
+                <!--<img src="../images/1.png" alt=""/>-->
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button style="background-color: #f26c3a" type="button" onclick="imgSure()" class="btn btn-success"data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="perheaderPstyle">活动管理>作品管理</p>
+        </div>
+    </div>
+    <div class="row perInput">
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <label for="perName">活动标题：</label>
+            <input type="text" id="perName" placeholder="请输入关键字">
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <label for="perTel" id="text">作品名：</label>
+            <select type="text" id="perTel" onchange="">
+            </select>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <label for="perTels" id="texts">状态：</label>
+            <select type="text" id="perTels" onchange="">
+                <option>启用</option>
+                <option>禁用</option>
+            </select>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <div class="perCha" id="ser">查询</div>
+        </div>
+    </div>
+    <div class="row per_Table">
+        <div class="col-lg-12">
+            <div class="table-responsive overflow" tabindex="5003" style="overflow: hidden; outline: none;">
+                <table class="table table-bordered " id="per_table">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>参赛活动标题</th>
+                        <th>作品名</th>
+                        <th>作品描述</th>
+                        <th>创建时间</th>
+                        <th>状态</th>
+                        <th>作品图片</th>
+                        <th>操 作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="per_table" id="Mytbody">
+
+                    <!--<tr>-->
+                        <!--<td>1</td>-->
+                        <!--<td>2525</td>-->
+                        <!--<td>2525</td>-->
+                        <!--<td>2525</td>-->
+                        <!--<td>hnh</td>-->
+                        <!--<td>ghgfh</td>-->
+                        <!--<td>fghfg</td>-->
+                        <!--<td>-->
+                            <!--<span class='glyphicon glyphicon-trash per_span' onclick='per_edite(text2)'></span>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="page">
+        <div id="topList">上一页</div>
+        <ul id="toBeNowList"></ul>
+        <div id="downList">下一页</div>
+    </div>
+    <div class="row">
+        <div id="per_maxBox" class="col-lg-12 per_maxBox">
+            <div>
+                <p class="per_boxP">提 示</p>
+                <div id="per_minBox" class="per_minBox">
+
+                </div>
+                <div class="per_sure" id="Mupdata" onclick="closeWindow()">确认</div>
+                <div class="per_close" onclick="closeWindow()">取消</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/courseMag.js"></script>
+<script>
+    var page=5 ;// 每页显示的条数
+    var defpage=1 ; //默认显示的页数
+    var allpage ;// 总条数
+    var alllist  //分页
+
+    //查询
+    $('#ser').click(function () {
+        var title=$('#perName').val();
+        var option=$("#perTel").find("option:selected").text();
+        var state=$("#perTels").find("option:selected").text();
+
+        //alert(state)
+        $.post('/participantWorks/knowledgeSearch.do',{'title':title,'option':option,'state':state}, function (data) {
+            var obj=data
+            $('#Mytbody').html('');
+             console.log(obj)
+            for(var i=0;i<obj.length;i++){
+                var state;
+                if(obj[i].state==1){
+                    state="启用"
+                }else{
+                    state="禁用"
+                }
+                $('#Mytbody').append("<tr><td>"+obj[i].pworks_id+"</td><td>"+obj[i].act_title+"</td><td>"+obj[i].pworks_title+"</td><td>"+obj[i].pworks_descript+"</td><td>"+obj[i].joinDate+"</td><td>"+state+"</td><td><button sid='"+obj[i].pworks_id+"'class='showImg'>查看</button></td><td><span state='"+obj[i].state+"' sid='"+obj[i].pworks_id+"' class='del glyphicon glyphicon-trash per_span' onclick='per_edite(text2)'></span></td></tr>")
+            }
+        },'json')
+    })
+    //请求数据的总行数
+    $(function(){
+        $.get('/participantWorks/listAll.do',function(data){
+            console.log(data[0].num);
+            allpage=parseInt(data[0].num);
+            alllist=Math.ceil(allpage/page);
+            //alert(allpage )
+            $('#toBeNowList').html('');
+            for(var i= 1;i<=alllist;i++){
+                $('#toBeNowList').append('<li onclick="listpage(this) ">'+i+'</li>')
+            }
+        })
+    });
+    function listpage(obj){
+        defpage=$(obj).text();
+        show()
+    }
+    //下一页
+    $('#downList').click(function () {
+        defpage++;
+        if(defpage>alllist){
+            defpage=alllist
+        }
+        show();
+    })
+    //上一页
+    $('#topList').click(function () {
+        defpage--;
+        if(defpage==0){
+            defpage=1;
+        }
+        show();
+    });
+    //页面加载显示数据
+    function show(){
+        $.get('/participantWorks/knowledgeShow.do', {'page':page,'defpage':defpage},function (data) {
+            var obj=data;
+
+            $('#Mytbody').html('');
+              console.log(obj)
+            for(var i=0;i<obj.length;i++){
+                var state;
+                if(obj[i].state==1){
+                    state="启用"
+                }else{
+                    state="禁用"
+                }
+                $('#Mytbody').append("<tr><td>"+obj[i].pworks_id+"</td><td>"+obj[i].act_title+"</td><td>"+obj[i].pworks_title+"</td><td>"+obj[i].pworks_descript+"</td><td>"+obj[i].joinDate+"</td><td>"+state+"</td><td><button sid='"+obj[i].pworks_ptcp_id+"' class='showImg'>查看</button></td><td><span state='"+obj[i].state+"' sid='"+obj[i].pworks_id+"' class='del glyphicon glyphicon-trash per_span' onclick='per_edite(text2)'></span></td></tr>")
+            }
+        },'json')
+    }
+    $(function () {
+        show();
+    });
+    // 删除的委派事件（穿ID  修改状态码）
+    $('#Mytbody').on('click', ('.del'), function () {
+        var id=$(this).attr('sid');
+        var state=$(this).attr('state');
+        console.log(id)
+        $('#Mupdata').click(function () {
+            $.post('/participantWorks/knowledgedelete.do',{'state':state,'id':id},function(data){
+                console.log(data);
+                //console.log('删除成功11');
+                show();
+            })
+        })
+    })
+
+    $('#Mytbody').on('click', ('.showImg'), function () {
+       // console.log("55555")
+        var id=$(this).attr("sid");
+       // alert(id);
+        $.post("/participantWorks/EvaluateImg.do", {id:id},function(data){
+            for (let i=0;i<data.length;i++){
+                $("#imgBox").append("<img src='"+data[i].pworks_url+"' >");
+            }
+            console.log(data);
+        },"json");
+        $("#myModal9").modal()
+    })
+    //收起图片查看框
+    function imgSure() {
+        $("#imgBox").html("");
+    }
+    //《===========作品名加载事件=============================
+    $(function(){
+        $.post('/participantWorks/listAllName.do',{},function(data){
+            console.log(data)
+            //alert("我请求名字")
+            for(var i=0;i<data.length;i++){
+                $("#perTel").append("<option>"+data[i].pworks_title+"</option>")
+            }
+        },"json");
+    });
+</script>
+
+</body>
+</html>

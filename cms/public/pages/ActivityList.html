@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/courseMag.css">
+    <title>活动列表</title>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        /*.modal-content{*/
+            /*background-color: rgb(144, 144, 153);*/
+            /*color: white;*/
+        /*}*/
+        ul {
+            list-style: none;
+        }
+        #toBeNowList >li {
+            float: left;
+            margin: 0 2%;
+            color:#fff;
+            font-size: 22px;
+        }
+        #page{
+            margin: 0 auto ;
+            width: 80%;
+            text-align: center;
+        }
+        #page>div {
+            float: left;
+            font-size: 20px;
+            margin: 0 10%;
+            color:#fff
+        }
+    </style>
+
+</head>
+<body>
+
+<!--新增模态框-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">新增活动</h4>
+            </div>
+            <div class="modal-body ">
+
+                <div class="form-group magin_left">
+                    <label for="addInputName">活动标题</label>
+                    <input type="text" class="form-control" id="addInputName" placeholder="">
+                </div>
+                <div class="form-group uploadDesigner">
+                    <label for="addInputFile">活动图片</label>
+                    <img src="../img/timg.jpg" alt="" id="yulan"/>
+                    <form  class="form-block" enctype="multipart/form-data" id="myform">
+                        <input type="file" name="myfile" id="addInputFile">
+                    </form>
+                </div>
+                <div class="form-group magin_left">
+                    <label for="addInputIntroduce">活动介绍</label>
+                    <textarea class="form-control" id="addInputIntroduce" rows="3" placeholder="描述活动的情况"></textarea>
+                </div>
+                <!--<div class="form-group magin_left">-->
+                    <!--<label for="addInputProduct">设计师作品介绍</label>-->
+                    <!--<textarea class="form-control" id="addInputProduct" rows="3" placeholder="设计师的相关作品情况"></textarea>-->
+                <!--</div>-->
+            </div>
+            <div class="modal-footer">
+                <button style="background-color: #f26c3a" type="button" class="btn btn-success" >保存</button>
+                <button  type="button"  class="btn btn-success" data-dismiss="modal" >取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--修改模态框-->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="perheaderPstyle">活动管理>活动列表</p>
+        </div>
+    </div>
+    <div class="row perInput">
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <label for="perName">标题：</label>
+            <input type="text" id="perName">
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <label for="perTel" id="text">创建人：</label>
+            <select type="text" id="perTel" onchange="">
+            </select>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <label for="perTels" id="texts">状态：</label>
+            <select type="text" id="perTels" onchange="">
+                <option>启用</option>
+                <option>禁用</option>
+            </select>
+        </div>
+        <!--查询、-->
+        <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2">
+            <div class="perCha" id="ser">查询</div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 mp">
+            <div class="cou_app">
+                <div>
+                    <span class="glyphicon glyphicon-plus-sign cou_coi"></span>
+                </div>
+                <div><a href="newActivityssList.html">新增活动</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="row per_Table">
+        <div class="col-lg-12">
+            <div class="table-responsive overflow" tabindex="5003" style="overflow: hidden; outline: none;">
+                <table class="table table-bordered " id="per_table">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>活动标题</th>
+                        <th>活动时间</th>
+                        <th>活动介绍</th>
+                        <th>创建人</th>
+                        <th>创建时间</th>
+                        <th>状态</th>
+                        <th>操 作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="per_table" id="Mytbody">
+                    <!--<tr>-->
+                        <!--<td>1</td>-->
+                        <!--<td>2525</td>-->
+                        <!--<td>2525</td>-->
+                        <!--<td>2525</td>-->
+                        <!--<td>hnh</td>-->
+                        <!--<td>ghgfh</td>-->
+                        <!--<td>fghfg</td>-->
+                        <!--<td>-->
+                            <!--<a style="color: white" href="updateActivityList.html"><span class='glyphicon glyphicon-edit' ></span></a>-->
+                            <!--<span class='glyphicon glyphicon-trash per_span' onclick='per_edite(text2)'></span>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="page">
+        <div id="topList">上一页</div>
+        <ul id="toBeNowList"></ul>
+        <div id="downList">下一页</div>
+    </div>
+    <div class="row">
+        <div id="per_maxBox" class="col-lg-12 per_maxBox">
+            <div>
+                <p class="per_boxP">提 示</p>
+                <div id="per_minBox" class="per_minBox">
+
+                </div>
+                <div class="per_sure" id="Mupdata" onclick="closeWindow()">确认</div>
+                <div class="per_close" onclick="closeWindow()">取消</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/courseMag.js"></script>
+<script>
+    var page=5 ;// 每页显示的条数
+    var defpage=1 ; //默认显示的页数
+    var allpage ;// 总条数
+    var alllist  //分页
+
+    //查询
+    $('#ser').click(function () {
+        var title=$('#perName').val();
+        var option=$("#perTel").find("option:selected").text();
+        var state=$("#perTels").find("option:selected").text();
+        //alert(state)
+        $.post('/activity/knowledgeSearch.do',{'title':title,'option':option,'state':state}, function (data) {
+            var obj=data
+            $('#Mytbody').html('');
+            //  console.log(obj)
+            for(var i=0;i<obj.length;i++){
+                var state;
+                if(obj[i].state==1){
+                    state="启用"
+                }else{
+                    state="禁用"
+                }
+
+                $('#Mytbody').append("<tr><td>"+obj[i].act_id+"</td><td>"+obj[i].act_title+"</td><td>"+obj[i].act_date+"</td><td>"+obj[i].act_details+"</td><td>"+obj[i].admin_name+"</td><td>"+obj[i].joinDate+"</td><td>"+state+"</td><td><a style='color: white' href='updateActivityList.html'><span class='glyphicon glyphicon-edit' ></span></a><span sid='"+obj[i].act_id+"' class='del glyphicon glyphicon-lock per_span' onclick='per_edite(text2)'></span></td></tr>")
+            }
+
+        },'json')
+
+    })
+
+    //请求数据的总行数
+
+    $(function(){
+        $.get('/activity/listAll.do',function(data){
+            console.log(data[0].num);
+            allpage=parseInt(data[0].num);
+            alllist=Math.ceil(allpage/page);
+            console.log(alllist)
+            $('#toBeNowList').html('');
+            for(var i= 1;i<=alllist;i++){
+                $('#toBeNowList').append('<li onclick="listpage(this) ">'+i+'</li>')
+            }
+
+        })
+    })
+    function listpage(obj){
+        defpage=$(obj).text();
+        show()
+    }
+    //下一页
+    $('#downList').click(function () {
+        defpage++;
+        if(defpage>alllist){
+            defpage=alllist
+        }
+        show();
+    })
+    //上一页
+    $('#topList').click(function () {
+        defpage--;
+        if(defpage==0){
+            defpage=1;
+        }
+        show();
+    })
+
+    //页面加载显示数据
+    function show(){
+        $.get('/activity/knowledgeShow.do', {'page':page,'defpage':defpage},function (data) {
+            var obj=data
+            $('#Mytbody').html('');
+              console.log(obj)
+            var arr=[];
+            var myarr=[];
+            var json={};
+            for(var i=0;i<obj.length;i++){
+                var state;
+                if(obj[i].state==1){
+                    state="启用"
+                }else{
+                    state="禁用"
+                }
+                arr.push(obj[i].admin_name);
+                $('#Mytbody').append("<tr><td>"+obj[i].act_id+"</td><td>"+obj[i].act_title+"</td><td>"+obj[i].act_date+"</td><td>"+obj[i].act_details+"</td><td>"+obj[i].admin_name+"</td><td>"+obj[i].joinDate+"</td><td>"+state+"</td><td><a style='color: white' href='updateActivityList.html'><span class='glyphicon glyphicon-edit' ></span></a><span state='"+obj[i].state+"' sid='"+obj[i].act_id+"' class='del glyphicon glyphicon-lock per_span' ></span></td></tr>")
+            }
+            for(var j=0;j<arr.length;j++){
+                if(!json[arr[j]]){
+                    myarr.push(arr[j])
+                    json[arr[j]]=1
+                }
+            }
+            $('#perTel').html('')
+            for(var i=0;i<myarr.length;i++){
+                $('#perTel').append("<option id='Moption'>"+myarr[i]+"</option>")
+            }
+        },'json')
+    }
+    $(function () {
+        show();
+    })
+    // 删除的委派事件（穿ID  修改状态码）
+    $('#Mytbody').on('click', ('.del'), function () {
+        var id=$(this).attr('sid');
+        var state=$(this).attr('state');
+        console.log(id)
+            $.post('/activity/knowledgedelete.do',{'state':state,'id':id},function(data){
+                console.log(data);
+                //console.log('删除成功11');
+                show();
+            })
+
+    })
+    $("#myadd").click(function(){
+        $("#myModal").modal()
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+*{margin: 0;border: 0}
+body{font:14px"宋体","Arial Narrow",HELVETICA;-webkit-text-size-adjust:100%;}
+a{color:#333;text-decoration:none}
+a:hover{text-decoration:underline}
+em{font-style:normal}
+li{list-style:none}
+img{border:0;vertical-align:middle}
+table{border-collapse:collapse;border-spacing:0}
+p{word-wrap:break-word}
+@fontColor:#333;
+@fontColorHover:#9a1612;
+/*---新增 by孟菲 2017-12-14---*/
+@fontColorDark: #666; /*字体暗色*/
+@whiteBg8:rgba(255,255,255,.8);
+@whiteBg5:rgba(255,255,255,.5);
+@grayBg2:rgba(204,204,204,.2);
+@grayBg3:rgba(204,204,204,.3);
+/*---------------------------*/
+#album_nav{
+  height: 160px;
+}
+#album_foot{
+  height: 170px;
+}
+.content,.navDiv{
+  position: relative;
+}
+.MyFoot{
+  z-index: 0;
+}
+/*---新增 by孟菲 2017-12-14---*/
+/*下拉框样式*/
+select{
+  height: 40px;
+  width: 120px;
+  outline: none;
+  color: @fontColor;
+  background: @whiteBg8;
+}
+option{
+  background: @whiteBg8;
+  color: @fontColor;
+}
+/*输入框样式*/
+input{
+  height: 40px;
+  color: @fontColor;
+  background:@whiteBg8;
+  outline: none;
+  caret-color:@fontColorHover;
+  padding-left: 5px;
+}
+::-webkit-input-placeholder{
+  color:@fontColorDark;
+}
+/*---------------------------*/
+

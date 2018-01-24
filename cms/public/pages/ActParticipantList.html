@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/courseMag.css">
+    <title>活动报名管理</title>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        ul {
+            list-style: none;
+        }
+        #toBeNowList >li {
+            float: left;
+            margin: 0 2%;
+            color:#fff;
+            font-size: 22px;
+        }
+        #page{
+            margin: 0 auto ;
+            width: 80%;
+            text-align: center;
+        }
+        #page>div {
+            float: left;
+            font-size: 20px;
+            margin: 0 10%;
+            color:#fff
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="perheaderPstyle">活动管理>报名管理</p>
+        </div>
+    </div>
+    <div class="row perInput">
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <label for="perName">活动标题：</label>
+            <input type="text" id="perName" placeholder="请输入关键字">
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <label for="text">用户名：</label>
+            <input type="text" id="text" placeholder="请输入关键字">
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <label for="perTels" id="texts">状态：</label>
+            <select type="text" id="perTels" onchange="">
+                <option>启用</option>
+                <option>禁用</option>
+            </select>
+        </div>
+
+        <!--<div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">-->
+
+        <!--</div>-->
+        <!--下拉框---占位框-->
+        <!--<div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 perO">-->
+            <!--<div class="per_btn"></div>-->
+        <!--</div>-->
+        <!--查询、-->
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4">
+            <div class="perCha" id="ser">查询</div>
+        </div>
+    </div>
+    <div class="row per_Table">
+        <div class="col-lg-12">
+            <div class="table-responsive overflow" tabindex="5003" style="overflow: hidden; outline: none;">
+                <table class="table table-bordered " id="per_table">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>活动标题</th>
+                        <th>用户名称</th>
+                        <th>成绩</th>
+                        <th>备注</th>
+                        <th>创建时间</th>
+                        <th>状态</th>
+                        <th>操 作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="per_table" id="Mytbody">
+                    <!--<tr>-->
+                        <!--<td>1</td>-->
+                        <!--<td>2525</td>-->
+                        <!--<td>2525</td>-->
+                        <!--<td>2525</td>-->
+                        <!--<td>hnh</td>-->
+                        <!--<td>ghgfh</td>-->
+                        <!--<td>fghfg</td>-->
+                        <!--<td>-->
+                            <!--<span class='glyphicon glyphicon-trash per_span' onclick='per_edite(text2)'></span>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="page">
+        <div id="topList">上一页</div>
+        <ul id="toBeNowList"></ul>
+        <div id="downList">下一页</div>
+    </div>
+    <div class="row">
+        <div id="per_maxBox" class="col-lg-12 per_maxBox">
+            <div>
+                <p class="per_boxP">提 示</p>
+                <div id="per_minBox" class="per_minBox">
+
+                </div>
+                <div class="per_sure" id="Mupdata" onclick="closeWindow()">确认</div>
+                <div class="per_close" onclick="closeWindow()">取消</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/courseMag.js"></script>
+<script>
+    var page=5 ;// 每页显示的条数
+    var defpage=1 ; //默认显示的页数
+    var allpage ;// 总条数
+    var alllist  //分页
+
+    //查询
+    $('#ser').click(function () {
+        var title=$('#perName').val();
+        var option=$("#text").val();
+        var state=$("#perTels").find("option:selected").text();
+        alert(state)
+        $.post('/actpartipant/knowledgeSearch.do',{'title':title,'option':option,'state':state}, function (data) {
+            var obj=data
+            $('#Mytbody').html('');
+            //  console.log(obj)
+            for(var i=0;i<obj.length;i++){
+                var state;
+                if(obj[i].state==1){
+                    state="启用"
+                }else{
+                    state="禁用"
+                }
+                $('#Mytbody').append("<tr><td>"+obj[i].ptcp_id+"</td><td>"+obj[i].act_title+"</td><td>"+obj[i].user_name+"</td><td>"+obj[i].ptcp_remark+"</td><td>"+obj[i].ptcp_grade+"</td><td>"+obj[i].joinDate+"</td><td>"+state+"</td><td><span sid='"+obj[i].ptcp_id+"' class='del glyphicon glyphicon-trash per_span' onclick='per_edite(text2)'></span></td></tr>")
+            }
+
+        },'json')
+
+    })
+    //请求数据的总行数
+    $(function(){
+        $.get('/actpartipant/listAll.do',function(data){
+            console.log(data[0].num);
+            allpage=parseInt(data[0].num);
+            alllist=Math.ceil(allpage/page);
+            console.log(alllist)
+            $('#toBeNowList').html('');
+            for(var i= 1;i<=alllist;i++){
+                $('#toBeNowList').append('<li onclick="listpage(this) ">'+i+'</li>')
+            }
+        })
+    })
+    function listpage(obj){
+        defpage=$(obj).text();
+        show()
+    }
+    //下一页
+    $('#downList').click(function () {
+        defpage++;
+        if(defpage>alllist){
+            defpage=alllist
+        }
+        show();
+    })
+    //上一页
+    $('#topList').click(function () {
+        defpage--;
+        if(defpage==0){
+            defpage=1;
+        }
+        show();
+    })
+
+    //页面加载显示数据
+    function show(){
+        $.get('/actpartipant/knowledgeShow.do', {'page':page,'defpage':defpage},function (data) {
+            var obj=data;
+            $('#Mytbody').html('');
+            console.log(obj)
+            for(var i=0;i<obj.length;i++){
+                var state;
+                if(obj[i].state==1){
+                    state="启用"
+                }else{
+                    state="禁用"
+                }
+                $('#Mytbody').append("<tr><td>"+obj[i].ptcp_id+"</td><td>"+obj[i].act_title+"</td><td>"+obj[i].user_name+"</td><td>"+obj[i].ptcp_remark+"</td><td>"+obj[i].ptcp_grade+"</td><td>"+obj[i].joinDate+"</td><td>"+state+"</td><td><span state='"+obj[i].state+"' sid='"+obj[i].ptcp_id+"' class='del glyphicon glyphicon-trash per_span' onclick='per_edite(text2)'></span></td></tr>")
+            }
+
+        },'json')
+    }
+    $(function () {
+        show();
+    })
+    // 删除的委派事件（穿ID  修改状态码）
+    $('#Mytbody').on('click', ('.del'), function () {
+        var id=$(this).attr('sid');
+        var state=$(this).attr('state');
+        //alert(state)
+        $('#Mupdata').click(function () {
+            $.post('/actpartipant/knowledgedelete.do',{'state':state,'id':id},function(data){
+                console.log(data);
+                //console.log('删除成功11');
+                show();
+            })
+        })
+    })
+</script>
+
+</body>
+</html>

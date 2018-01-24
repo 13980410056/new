@@ -1,0 +1,67 @@
+.MyFoot {
+    height: 170px;
+}
+.MyFoot>div {
+    float: left;
+}
+.MyFoot_left {
+    width: 30%;
+}
+.MyFoot_left>div {
+    margin: 30px 0 0 100px;
+    width: 100px;
+    height: 100px;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    background-image: url(../../assets/images/logo.png);
+}
+.MyFoot_middle {
+    width: 40%;
+    text-align: center;
+}
+.MyFoot_middle >div:first-of-type {
+    background-image: url(../../assets/images/photoBorder.png);
+    width: 140px;
+    line-height: 40px;
+    margin: 0 auto;
+    height: 40px;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+.MyFoot_middle p:first-of-type {
+    margin: 40px 0 20px 0;
+}
+.Myfoot_right {
+     width: 30%;
+ }
+.Myfoot_right>div {
+    margin: 100px 0 0 80px;
+    position: relative;
+}
+.Myfoot_right_span1:hover + .Myfoot_right_abs {
+    display: block;
+}
+
+.Myfoot_right span {
+    font-size: 35px;
+    margin: 0 20px;
+    color: rgb(44, 62, 80);
+}
+.Myfoot_right_abs {
+    position: absolute;
+    width: 82px;
+    left: 0px;
+    display: none;
+    top: -85px;
+    height: 82px;
+    background-image: url(../../assets/images/han.png);
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+.Myfoot_right_weibo {
+    left: 160px;
+
+}
+.fa-weibo:hover + .Myfoot_right_weibo {
+    display: block;
+}
